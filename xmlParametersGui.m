@@ -7,6 +7,9 @@ function xmlParametersGui(varargin)
 %
 % -p : Name of the .xml file to build a panel from
 %
+%Example:
+%xmlParametersGui('-pparams.xml'); Build a graphical user interface from params.xml
+%
 %Author: Daniel Lafontaine, lafontad@mskcc.org
 %
 %Last specifications modified:
