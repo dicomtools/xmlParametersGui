@@ -7,3 +7,6 @@
 [![GPLv3 license](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://github.com/dicomtools/xmlParametersGui/blob/main/LICENSE)
 
 ![xmlParametersGui](images/xmlParametersGuiMain.png)
+
+
+
