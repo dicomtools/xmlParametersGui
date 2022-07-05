@@ -188,15 +188,11 @@ function xmlParametersGui(varargin)
 
     function proceedCallback(~, ~)
         
-        sExportDir = '';        
         if isfield(s.xmlParametersGui, 'exportFile')            
             sMatFile = s.xmlParametersGui.exportFile.Text;  
             if exist(sMatFile, 'file')
                 delete(sMatFile);
-            end
-        else
-            msgbox('Error: xmlParametersGui(): Cant find the export .mat file name from param.xml!', 'Error');
-            return;            
+            end          
         end
          
         aValues = paramValues('get');  
@@ -214,10 +210,31 @@ function xmlParametersGui(varargin)
             xmlParams{arraySize(1)+1, 2} = asMainDir{1};
         end
 
-        save(sMatFile, 'xmlParams');
+        % If <exportFile></exportFile> is define, save a .mat file of the parameters
+        
+        if isfield(s.xmlParametersGui, 'exportFile')             
+            save(sMatFile, 'xmlParams');
+        end
         
         delete(dlgWindows);
-
+        
+        % If a <functionName></functionName> is define, call the function with the parameters
+        
+        sFunctionName = [];          
+              
+        if numel(s.xmlParametersGui.protocol) == 1
+            if isfield(s.xmlParametersGui.protocol, 'functionName')
+                sFunctionName = s.xmlParametersGui.protocol.functionName.Text;
+            end            
+        else            
+            if isfield(s.xmlParametersGui.protocol{gdCurrentProtocol}, 'functionName')
+                sFunctionName = s.xmlParametersGui.protocol{gdCurrentProtocol}.functionName.Text;   
+            end
+        end        
+        
+        if ~isempty(sFunctionName)
+            eval(sprintf('%s(xmlParams)', sFunctionName));    
+        end
     end
 
     function protocolCallback(hObject, ~)
