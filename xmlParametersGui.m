@@ -206,8 +206,10 @@ function xmlParametersGui(varargin)
 
         if ~isempty(asMainDir)
             arraySize = size(xmlParams);
-            xmlParams{arraySize(1)+1, 1} = 'Dicom Folder';
-            xmlParams{arraySize(1)+1, 2} = asMainDir{1};
+            for dd=1:numel(asMainDir)                
+                xmlParams{arraySize(1)+dd, 1} = 'Dicom Folder';
+                xmlParams{arraySize(1)+dd, 2} = asMainDir{dd};
+            end
         end
 
         % If <exportFile></exportFile> is define, save a .mat file of the parameters
