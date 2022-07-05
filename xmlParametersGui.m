@@ -7,9 +7,6 @@ function xmlParametersGui(varargin)
 %
 % -p : Name of the .xml file to build a panel from
 %
-%Example:
-%xmlParametersGui('-pparams.xml'); Build a graphical user interface from params.xml
-%
 %Author: Daniel Lafontaine, lafontad@mskcc.org
 %
 %Last specifications modified:
@@ -347,7 +344,10 @@ function xmlParametersGui(varargin)
         
         if isfield(tField, 'fieldValue') 
             tField.sValue = tField.fieldValue.Text; end
-
+        
+        if isfield(tField, 'fieldOffset') 
+            tField.dValue = str2double(tField.fieldOffset.Text); end
+        
         if isfield(tField, 'fieldOrder') 
             tField.sOrder  = tField.fieldOrder.Text; end
 
@@ -657,7 +657,7 @@ function xmlParametersGui(varargin)
                                  'Position', [dColOffset+150+((dSub-1)*30)  dlgWindowsSizeY-((str2double(tField.sOrder)+1)*30)-20-45 165 25],...
                                  'enable'  , 'on',...
                                  'String'  , split(tField.sValue, ','),...
-                                 'Value'   , 1, ...
+                                 'Value'   , tField.dValue, ...
                                  'Callback', @uiCallback...                          
                                  );    
                              
