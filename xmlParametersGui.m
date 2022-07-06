@@ -34,7 +34,7 @@ function xmlParametersGui(varargin)
     uicontrolPointers('reset');
     paramValues('reset');
     
-    varargin = replace(lower(varargin), '"', '');
+    varargin = replace(varargin, '"', '');
     varargin = replace(varargin, ']', '');
     varargin = replace(varargin, '[', '');
     
