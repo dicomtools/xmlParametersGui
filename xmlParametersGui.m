@@ -51,7 +51,7 @@ function xmlParametersGui(varargin)
 %            case '-b'
 %                argBorder = true; 
             case '-p'
-                argParamFile = sArgument; 
+                argParamFile = strtrim(sArgument); 
                 
             otherwise
                 asMainDir{argLoop} = sSwitchAndArgument;
