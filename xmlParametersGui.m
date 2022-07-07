@@ -188,13 +188,25 @@ function xmlParametersGui(varargin)
 
     function proceedCallback(~, ~)
         
-        if isfield(s.xmlParametersGui, 'exportFile')            
-            sMatFile = s.xmlParametersGui.exportFile.Text;  
-            if exist(sMatFile, 'file')
-                delete(sMatFile);
-            end          
+        sMatFile = [];
+        
+        if isfield(s.xmlParametersGui, 'exportFile')               
+            sMatFile = s.xmlParametersGui.exportFile.Text;                
+        elseif isfield(s.xmlParametersGui.protocol, 'exportFile')   
+            
+            if numel(s.xmlParametersGui.protocol) == 1
+                sMatFile = s.xmlParametersGui.protocol.exportFile.Text;                
+            else
+                sMatFile = s.xmlParametersGui.protocol{gdCurrentProtocol}.exportFile.Text;                
+            end                  
         end
          
+        if ~isempty(sMatFile)
+            if exist(sMatFile, 'file')
+                delete(sMatFile);
+            end           
+        end
+        
         aValues = paramValues('get');  
 
         for zz=1: numel(aValues)
@@ -214,7 +226,7 @@ function xmlParametersGui(varargin)
 
         % If <exportFile></exportFile> is define, save a .mat file of the parameters
         
-        if isfield(s.xmlParametersGui, 'exportFile')             
+        if ~isempty(sMatFile)            
             save(sMatFile, 'xmlParams');
         end
         
