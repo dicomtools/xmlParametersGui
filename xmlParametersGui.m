@@ -190,15 +190,23 @@ function xmlParametersGui(varargin)
         
         sMatFile = [];
         
-        if isfield(s.xmlParametersGui, 'exportFile')               
-            sMatFile = s.xmlParametersGui.exportFile.Text;                
-        elseif isfield(s.xmlParametersGui.protocol, 'exportFile')   
-            
-            if numel(s.xmlParametersGui.protocol) == 1
-                sMatFile = s.xmlParametersGui.protocol.exportFile.Text;                
-            else
+        if numel(s.xmlParametersGui.protocol) == 1
+        
+            if isfield(s.xmlParametersGui, 'exportFile')               
+                sMatFile = s.xmlParametersGui.exportFile.Text;                
+                
+            elseif isfield(s.xmlParametersGui.protocol, 'exportFile')               
+                
+                sMatFile = s.xmlParametersGui.protocol.exportFile.Text; 
+            end
+        else
+            if isfield(s.xmlParametersGui, 'exportFile')               
+                sMatFile = s.xmlParametersGui.exportFile.Text;                
+                
+            elseif isfield(s.xmlParametersGui.protocol{gdCurrentProtocol}, 'exportFile')   
+
                 sMatFile = s.xmlParametersGui.protocol{gdCurrentProtocol}.exportFile.Text;                
-            end                  
+            end            
         end
          
         if ~isempty(sMatFile)
