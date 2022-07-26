@@ -31,6 +31,8 @@ function xmlParametersGui(varargin)
 % You should have received a copy of the GNU General Public License
 % along with xmlParametersGui.  If not, see <http://www.gnu.org/licenses/>.        
     
+    argParamFile = [];
+
     uicontrolPointers('reset');
     paramValues('reset');
     
@@ -43,8 +45,8 @@ function xmlParametersGui(varargin)
     asMainDir='';
     argLoop=1;
     for ii = 1 : length(varargin)
-        sSwitchAndArgument = lower(varargin{ii});
-        cSwitch = sSwitchAndArgument(1:2);
+        sSwitchAndArgument = varargin{ii};
+        cSwitch = lower(sSwitchAndArgument(1:2));
         sArgument = sSwitchAndArgument(3:end);
         
         switch cSwitch
@@ -62,10 +64,10 @@ function xmlParametersGui(varargin)
         end                          
     end  
     
-    if exist('argParamFile')
+    if ~isempty(argParamFile)
         s = xml2struct(argParamFile);  
     else
-        msgbox('Error: xmlParametersGui(): Please pass a valid .xml parameter file name!', 'Error');
+        msgbox('Error: xmlParametersGui(): Need a valid .xml file name!', 'Error');
         return;
     end
         
