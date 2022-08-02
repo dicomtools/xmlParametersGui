@@ -724,6 +724,8 @@ function xmlParametersGui(varargin)
             switch hObject.Style 
                 case 'popupmenu'
                     newValue = hObject.String{hObject.Value};
+                case 'checkbox'
+                    newValue = hObject.Value;
                 otherwise
                     newValue = hObject.String;
             end
