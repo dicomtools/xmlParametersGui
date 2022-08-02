@@ -224,8 +224,8 @@ function xmlParametersGui(varargin)
         aValues = paramValues('get');  
 
         for zz=1: numel(aValues)
-            xmlParams{zz, 1} = aValues{zz}(1);
-            xmlParams{zz, 2} = aValues{zz}(2);
+            xmlParams{zz, 1} = aValues{zz}{1};
+            xmlParams{zz, 2} = aValues{zz}{2};
         end
         
         xmlParams = flip(xmlParams);
