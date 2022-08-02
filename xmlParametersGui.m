@@ -681,7 +681,7 @@ function xmlParametersGui(varargin)
                                  ));    
                               
                         aValue{1,1} = tField.sName;
-                        aValue{1,2} = tField.sValue;
+                        aValue{1,2} = str2double(tField.sValue);
                         aValue{1,3} = ui;
                             
                         paramValues('add', aValue);
