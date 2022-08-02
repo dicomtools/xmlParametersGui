@@ -43,8 +43,8 @@ function xmlParametersGui(varargin)
     asMainDir='';
     argLoop=1;
     for ii = 1 : length(varargin)
-        sSwitchAndArgument = lower(varargin{ii});
-        cSwitch = sSwitchAndArgument(1:2);
+        sSwitchAndArgument = varargin{ii};
+        cSwitch = lower(sSwitchAndArgument(1:2));
         sArgument = sSwitchAndArgument(3:end);
         
         switch cSwitch
