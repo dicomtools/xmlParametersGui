@@ -54,9 +54,15 @@ function xmlParametersGui(varargin)
                 argParamFile = strtrim(sArgument); 
                 
             otherwise
+                if (ispc)
+                    sDirSeparator = '\';
+                else
+                    sDirSeparator = '/';
+                end
+
                 asMainDir{argLoop} = sSwitchAndArgument;
-                if ~(asMainDir{argLoop}(end) == '\')
-                        asMainDir{argLoop} = [asMainDir{argLoop} '\'];                     
+                if ~(asMainDir{argLoop}(end) == sDirSeparator)
+                        asMainDir{argLoop} = [asMainDir{argLoop} sDirSeparator];
                 end
                 argLoop = argLoop+1; 
         end                          
