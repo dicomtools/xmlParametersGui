@@ -59,9 +59,15 @@ function xmlParametersGui(varargin)
                 argParamFile = strtrim(sArgument); 
                 
             otherwise
+                if (ispc)
+                    sDirSeparator = '\';
+                else
+                    sDirSeparator = '/';
+                end
+
                 asMainDir{argLoop} = sSwitchAndArgument;
-                if ~(asMainDir{argLoop}(end) == '\')
-                        asMainDir{argLoop} = [asMainDir{argLoop} '\'];                     
+                if ~(asMainDir{argLoop}(end) == sDirSeparator)
+                        asMainDir{argLoop} = [asMainDir{argLoop} sDirSeparator];
                 end
                 argLoop = argLoop+1; 
         end                          
@@ -233,8 +239,8 @@ function xmlParametersGui(varargin)
         aValues = paramValues('get');  
 
         for zz=1: numel(aValues)
-            xmlParams{zz, 1} = aValues{zz}(1);
-            xmlParams{zz, 2} = aValues{zz}(2);
+            xmlParams{zz, 1} = aValues{zz}{1};
+            xmlParams{zz, 2} = aValues{zz}{2};
         end
         
         xmlParams = flip(xmlParams);
@@ -706,7 +712,7 @@ function xmlParametersGui(varargin)
                                       ));    
                               
                         aValue{1,1} = tField.sName;
-                        aValue{1,2} = tField.sValue;
+                        aValue{1,2} = str2double(tField.sValue);
                         aValue{1,3} = ui;
                             
                         paramValues('add', aValue);
@@ -754,6 +760,8 @@ function xmlParametersGui(varargin)
             switch hObject.Style 
                 case 'popupmenu'
                     newValue = hObject.String{hObject.Value};
+                case 'checkbox'
+                    newValue = hObject.Value;
                 otherwise
                     newValue = hObject.String;
             end
