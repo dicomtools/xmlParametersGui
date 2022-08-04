@@ -8,12 +8,13 @@ function xmlParametersGui(varargin)
 % -p : Name of the .xml file to build a panel from
 %
 %Author: Daniel Lafontaine, lafontad@mskcc.org
+%        David Zechowy, davidzech27@gmail.com
 %
 %Last specifications modified:
-%
+% 
 % Copyright 2022, Daniel Lafontaine, on behalf of the xmlParametersGui development team.
 %
-% This file is part of The Triple Dimention Fusion (xmlParametersGui).
+% This file is part of xmlParametersGui (xmlParametersGui).
 %
 % xmlParametersGui development has been led by: Daniel Lafontaine
 %
