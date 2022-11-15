@@ -8,9 +8,12 @@
 
 ![xmlParametersGui](images/xmlParametersGuiMain.png)
 
+## MATLAB tested version
 
+* MATLAB 2020a
 
+## Installation
 
+* https://github.com/dicomtools/xmlParametersGui/wiki/Source-code-version-of-xmlParametersGui
 
-
-
+Visit https://daniellafontaine.com/ for more information
