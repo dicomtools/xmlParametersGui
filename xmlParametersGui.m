@@ -39,17 +39,19 @@ function xmlParametersGui(varargin)
     
     guiBackgroundColor('set', [0.16 0.18 0.20]);
     guiForegroundColor('set', [0.94 0.94 0.94]);
-    
-    varargin = replace(varargin, '"', '');
-    varargin = replace(varargin, ']', '');
-    varargin = replace(varargin, '[', '');
-    
+        
     sDicomFileName = [];
 
     asMainDir='';
     argLoop=1;
     for ii = 1 : length(varargin)
-        sSwitchAndArgument = varargin{ii};
+
+        sSwitchAndArgument = char(varargin{ii});
+
+        sSwitchAndArgument = replace(sSwitchAndArgument, '"', '');
+        sSwitchAndArgument = replace(sSwitchAndArgument, ']', '');
+        sSwitchAndArgument = replace(sSwitchAndArgument, '[', '');
+
         cSwitch = lower(sSwitchAndArgument(1:2));
         sArgument = sSwitchAndArgument(3:end);
         
