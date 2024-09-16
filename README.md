@@ -10,7 +10,7 @@
 
 ## MATLAB tested version
 
-* MATLAB 2020a
+* MATLAB 2024a
 
 ## Installation
 
