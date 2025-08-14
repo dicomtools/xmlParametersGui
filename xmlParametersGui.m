@@ -85,15 +85,15 @@ function xmlParametersGui(varargin)
         
     gdCurrentProtocol = str2double(s.xmlParametersGui.defaultProtocol.Text);
 
-    if numel(s.xmlParametersGui.protocol) == 1
-        dNbCol   = numel(s.xmlParametersGui.protocol.columns.columnName); 
+    if isscalar(s.xmlParametersGui.protocol)
+        dNbCol = numel(s.xmlParametersGui.protocol.columns.columnName); 
     else
-        dNbCol   = numel(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnName); 
+        dNbCol = numel(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnName); 
     end
     
     dColTotalSize = 0;
-    if numel(s.xmlParametersGui.protocol) == 1    
-        if numel(s.xmlParametersGui.protocol.columns.columnSize) == 1
+    if isscalar(s.xmlParametersGui.protocol)    
+        if isscalar(s.xmlParametersGui.protocol.columns.columnSize)
             dColTotalSize = str2double( s.xmlParametersGui.protocol.columns.columnSize.Text);
         else
             for cc=1: dNbCol
@@ -101,7 +101,7 @@ function xmlParametersGui(varargin)
             end    
         end    
     else
-        if numel(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize) == 1
+        if isscalar(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize)
             dColTotalSize = str2double( s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize.Text);
         else
             for cc=1: dNbCol
@@ -140,9 +140,10 @@ function xmlParametersGui(varargin)
                   'position'           , [20 dlgWindowsSizeY-48 100 25]...
                   );     
           
-    if numel(s.xmlParametersGui.protocol) == 1
+    if isscalar(s.xmlParametersGui.protocol)
         sProtocolList = s.xmlParametersGui.protocol.protocolName.Text;
     else
+        sProtocolList = cell(1, numel(s.xmlParametersGui.protocol));
         for pp=1:numel(s.xmlParametersGui.protocol)
             sProtocolList{pp}=s.xmlParametersGui.protocol{pp}.protocolName.Text;
         end
@@ -214,7 +215,7 @@ function xmlParametersGui(varargin)
         
         sMatFile = [];
         
-        if numel(s.xmlParametersGui.protocol) == 1
+        if isscalar(s.xmlParametersGui.protocol)
         
             if isfield(s.xmlParametersGui, 'exportFile')               
                 sMatFile = s.xmlParametersGui.exportFile.Text;                
@@ -268,7 +269,7 @@ function xmlParametersGui(varargin)
         
         sFunctionName = [];          
               
-        if numel(s.xmlParametersGui.protocol) == 1
+        if isscalar(s.xmlParametersGui.protocol)
             if isfield(s.xmlParametersGui.protocol, 'functionName')
                 sFunctionName = s.xmlParametersGui.protocol.functionName.Text;
             end            
@@ -287,15 +288,15 @@ function xmlParametersGui(varargin)
         
         gdCurrentProtocol = hObject.Value;
 
-        if numel(s.xmlParametersGui.protocol) == 1
+        if isscalar(s.xmlParametersGui.protocol)
             dNbCol = numel(s.xmlParametersGui.protocol.columns.columnName); 
         else
             dNbCol = numel(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnName); 
         end
     
         dColTotalSize = 0;
-        if numel(s.xmlParametersGui.protocol) == 1    
-            if numel(s.xmlParametersGui.protocol.columns.columnSize) == 1
+        if isscalar(s.xmlParametersGui.protocol)    
+            if isscalar(s.xmlParametersGui.protocol.columns.columnSize)
                 dColTotalSize = str2double( s.xmlParametersGui.protocol.columns.columnSize.Text);
             else
                 for dd=1: dNbCol
@@ -303,7 +304,7 @@ function xmlParametersGui(varargin)
                 end    
             end    
         else
-            if numel(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize) == 1
+            if isscalar(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize)
                 dColTotalSize = str2double( s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize.Text);
             else
                 for dd=1: dNbCol
@@ -341,7 +342,7 @@ function xmlParametersGui(varargin)
 
         YSize = 1;
         
-        if numel(s.xmlParametersGui.protocol) == 1
+        if isscalar(s.xmlParametersGui.protocol)
             dNbCol = numel(s.xmlParametersGui.protocol.columns.columnName); 
         else
             dNbCol = numel(s.xmlParametersGui.protocol{index}.columns.columnName); 
@@ -350,13 +351,13 @@ function xmlParametersGui(varargin)
         for ll=1:dNbCol
 
             if(dNbCol == 1)
-                if numel(s.xmlParametersGui.protocol) == 1
+                if isscalar(s.xmlParametersGui.protocol)
                     tFields = s.xmlParametersGui.protocol.columns.fields;
                 else
                     tFields = s.xmlParametersGui.protocol{index}.column.fields;
                 end
             else
-                if numel(s.xmlParametersGui.protocol) == 1
+                if isscalar(s.xmlParametersGui.protocol)
                     tFields = s.xmlParametersGui.protocol.columns.fields{ll};
                 else
                     tFields = s.xmlParametersGui.protocol{index}.columns.fields{ll};
@@ -372,7 +373,7 @@ function xmlParametersGui(varargin)
             if isfield(tFields, 'field')
                 dNbFields = numel(tFields.field);      
                 for kk=1:dNbFields 
-                    if numel(tFields.field) == 1
+                    if isscalar(tFields.field)
                         tField = extractOneField(tFields.field);
                     else
                         tField = extractOneField(tFields.field{dNbFields - kk +1});
@@ -382,7 +383,7 @@ function xmlParametersGui(varargin)
                         YSize =  str2double(tField.sOrder);
                     end
 
-                    if numel(tFields.field) == 1
+                    if isscalar(tFields.field)
                         if isfield(tFields.field, 'field')
                             findFieldOrder(tFields.field, dColumn);
                         end
@@ -424,16 +425,16 @@ function xmlParametersGui(varargin)
     
     function displayProtocol(index)   
         
-        if numel(s.xmlParametersGui.protocol) == 1
+        if isscalar(s.xmlParametersGui.protocol)
             dNbCol = numel(s.xmlParametersGui.protocol.columns.columnName); 
-            if numel(s.xmlParametersGui.protocol.columns.columnSize) == 1
+            if isscalar(s.xmlParametersGui.protocol.columns.columnSize)
                 dColSize = str2double( s.xmlParametersGui.protocol.columns.columnSize.Text);
             else
                 dColSize = str2double( s.xmlParametersGui.protocol.columns.columnSize{index}.Text);               
             end
         else
             dNbCol = numel(s.xmlParametersGui.protocol{index}.columns.columnName); 
-            if numel(s.xmlParametersGui.protocol{index}.columns.columnSize) == 1
+            if isscalar(s.xmlParametersGui.protocol{index}.columns.columnSize)
                 dColSize = str2double( s.xmlParametersGui.protocol{index}.columns.columnSize.Text);
             else
                 dColSize = str2double( s.xmlParametersGui.protocol{index}.columns.columnSize{index}.Text);               
@@ -443,7 +444,7 @@ function xmlParametersGui(varargin)
         for jj=1:dNbCol
 
             if(dNbCol == 1)
-                if numel(s.xmlParametersGui.protocol) == 1
+                if isscalar(s.xmlParametersGui.protocol)
                     sColName = s.xmlParametersGui.protocol.columns.columnName.Text;
                     tFields  = s.xmlParametersGui.protocol.columns.fields;
                 else
@@ -451,7 +452,7 @@ function xmlParametersGui(varargin)
                     tFields  = s.xmlParametersGui.protocol{index}.columns.fields;
                 end
             else
-                if numel(s.xmlParametersGui.protocol) == 1
+                if isscalar(s.xmlParametersGui.protocol)
                     sColName = s.xmlParametersGui.protocol.columns.columnName{jj}.Text;
                     tFields  = s.xmlParametersGui.protocol.columns.fields{jj};
                 else
@@ -461,8 +462,8 @@ function xmlParametersGui(varargin)
             end
             
             dColOffset = 0;
-            if numel(s.xmlParametersGui.protocol) == 1
-                if numel(s.xmlParametersGui.protocol.columns.columnSize) == 1
+            if isscalar(s.xmlParametersGui.protocol)
+                if isscalar(s.xmlParametersGui.protocol.columns.columnSize)
                     dColSize   = str2double(s.xmlParametersGui.protocol.columns.columnSize.Text);
                     dColOffset = 0;
                 else
@@ -472,7 +473,7 @@ function xmlParametersGui(varargin)
                     end
                end
             else
-                if numel(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize) == 1
+                if isscalar(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize)
                    dColSize   = str2double(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize.Text);
                    dColOffset = 0;
                else
@@ -503,7 +504,7 @@ function xmlParametersGui(varargin)
                 dNbFields = numel(tFields.field);   
                 for kk=1:dNbFields 
 
-                    if numel(tFields.field) == 1
+                    if isscalar(tFields.field)
                         tField = extractOneField(tFields.field);
                     else
                         tField = extractOneField(tFields.field{dNbFields - kk +1});
@@ -511,7 +512,7 @@ function xmlParametersGui(varargin)
 
                     displayUiControl(tField, index, dSub);
 
-                    if numel(tFields.field) == 1
+                    if isscalar(tFields.field)
                         if isfield(tFields.field, 'field')
                       %      dSub = dSub+1;
                             setFieldsUiControl(tFields.field, index, dSub+1);
@@ -531,8 +532,8 @@ function xmlParametersGui(varargin)
         function displayUiControl(tField, index, dSub)
             
             dColOffset = 0;
-            if numel(s.xmlParametersGui.protocol) == 1
-                if numel(s.xmlParametersGui.protocol.columns.columnSize) == 1
+            if isscalar(s.xmlParametersGui.protocol)
+                if isscalar(s.xmlParametersGui.protocol.columns.columnSize)
                     dColSize   = str2double(s.xmlParametersGui.protocol.columns.columnSize.Text);
                     dColOffset = 0;
                 else
@@ -542,7 +543,7 @@ function xmlParametersGui(varargin)
                     end
                end
             else
-                if numel(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize) == 1
+                if isscalar(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize)
                    dColSize   = str2double(s.xmlParametersGui.protocol{gdCurrentProtocol}.columns.columnSize.Text);
                    dColOffset = 0;
                else

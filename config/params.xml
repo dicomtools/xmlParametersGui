@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xmlParametersGui version="1.0">
-	<guiName>Key Displayed Parameters</guiName>
+	<guiName>Protocol Example</guiName>
 	<defaultProtocol>1</defaultProtocol>
-	<exportFile>c:\temp\xmlParams.mat</exportFile>
 
 	<protocol>
 		<protocolName>Default Protocol</protocolName>
+	    <exportFile>c:\temp\exportedParameters.mat</exportFile>
+		<functionName></functionName >
 
 		<columns>
 
@@ -35,7 +36,7 @@
 					<fieldName>Origin Offset Y</fieldName> 
 					<fieldType>edit</fieldType>
 					<fieldValue>0</fieldValue>
-				</field>	
+				</field>				
 			</fields>							
 			
 			<columnName>Base Algorithm and Convergence</columnName> 
@@ -104,6 +105,7 @@
 					<fieldName>Reg 1-type</fieldName>
 					<fieldType>popup</fieldType>
 					<fieldValue>value1,value2</fieldValue>												
+					<fieldOffset>1</fieldOffset>
 				</field>			
 			</fields>
 			
@@ -112,6 +114,8 @@
  
  	<protocol>
 		<protocolName>Default Protocol2</protocolName>
+	    <exportFile>c:\temp\xmlParams.mat</exportFile>
+		<functionName></functionName >
 
 		<columns>
 			<columnName>Base Algorithm and Convergence</columnName> 
@@ -176,6 +180,7 @@
 					<fieldName>Reg 1-type</fieldName>
 					<fieldType>popup</fieldType>
 					<fieldValue>value1,value2</fieldValue>												
+					<fieldOffset>2</fieldOffset>
 				</field>			
 			</fields>
 			
